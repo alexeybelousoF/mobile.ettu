@@ -1,2 +1,2 @@
-web: python bd.py
-worker: python index_app.py
+web: python index_app.py
+heroku ps:scale web=1
