@@ -1,7 +1,7 @@
 import psycopg2
 import os
 
-DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE = os.environ['DATABASE_URL']
 
 print("Database opened successfully")
 
@@ -26,7 +26,7 @@ def get_saved(chat_id):
   return res
 
 def bd_init():
-  con = psycopg2.connect(DATABASE_URL, sslmode='require')
+  con = psycopg2.connect(DATABASE, sslmode='require')
   return con
 
 def create_table_once():
@@ -38,4 +38,4 @@ def create_table_once():
      URL TEXT UNIQUE NOT NULL, station_name TEXT NOT NULL);''')
   print("Table created successfully")
 
-#create_table_once()
+create_table_once()
