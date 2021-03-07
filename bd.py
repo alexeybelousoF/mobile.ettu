@@ -38,4 +38,4 @@ def create_table_once():
      URL TEXT UNIQUE NOT NULL, station_name TEXT NOT NULL);''')
   print("Table created successfully")
 
-create_table_once()
+#create_table_once()
