@@ -6,7 +6,7 @@ from parser_app import *
 from bd import *
 from telebot import types
 
-TG_TOKEN = '<api_token>' #токен под хероку
+# TG_TOKEN = '<api_token>' #токен под хероку
 bot = telebot.TeleBot(TG_TOKEN);
 server = Flask(__name__)
 
@@ -98,10 +98,10 @@ def getMessage():
 
 
 @server.route("/")
-def webhook():#пока не вкурсе че это вообще)))
+def webhook():
     bot.remove_webhook()
     bot.set_webhook(url='https://ettu-app.herokuapp.com/') #+ TOKEN
     return "!", 200
 
 
-server.run(host="91.108.6.38", port=int(os.environ.get('PORT', 5000)))
+server.run(host="127.0.0.0", port=int(os.environ.get('PORT', 5000)))
