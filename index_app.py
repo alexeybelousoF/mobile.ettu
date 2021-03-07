@@ -6,7 +6,8 @@ from parser_app import *
 from bd import *
 from telebot import types
 
-# TG_TOKEN = '<api_token>' #токен под хероку
+TG_TOKEN = os.environ['TG_TOKEN']
+
 bot = telebot.TeleBot(TG_TOKEN);
 server = Flask(__name__)
 
