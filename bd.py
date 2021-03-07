@@ -3,12 +3,6 @@ import psycopg2
 
 print("Database opened successfully")
 
-cur.execute('''CREATE TABLE userdata 
-     (id SERIAL,
-     CHAT_ID CHAR(25) NOT NULL,
-     URL TEXT UNIQUE NOT NULL, station_name TEXT NOT NULL);''')
-print("Table created successfully")
-
 def set_saved(chat_id, url, station_name):
   con = bd_init()
   cur = con.cursor()
@@ -32,3 +26,14 @@ def get_saved(chat_id):
 def bd_init():
   con = psycopg2.connect(DATABASE_URL, sslmode='require')
   return con
+
+def create_table_once():
+  con = bd_init()
+  cur = con.cursor
+  cur.execute('''CREATE TABLE userdata 
+     (id SERIAL,
+     CHAT_ID CHAR(25) NOT NULL,
+     URL TEXT UNIQUE NOT NULL, station_name TEXT NOT NULL);''')
+  print("Table created successfully")
+
+create_table_once()
