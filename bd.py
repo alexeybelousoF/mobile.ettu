@@ -31,7 +31,7 @@ def bd_init():
 
 def create_table_once():
   con = bd_init()
-  cur = con.cursor
+  cur = con.cursor()
   cur.execute('''CREATE TABLE userdata 
      (id SERIAL,
      CHAT_ID CHAR(25) NOT NULL,
