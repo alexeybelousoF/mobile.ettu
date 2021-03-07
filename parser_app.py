@@ -38,6 +38,9 @@ def get_schedule(url):
       break
     elif (item.name and item.name == 'div'):
       schedule.append(item)
-    
+
+  if len(schedule) == 1 :
+    return schedule
+
   del schedule[-1]
   return schedule
