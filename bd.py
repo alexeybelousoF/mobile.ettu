@@ -9,6 +9,7 @@ def set_saved(chat_id, url, station_name):
   con = bd_init()
   cur = con.cursor()
   try:
+    print(cur)
     cur.execute(
       "INSERT INTO userdata (chat_id,url,station_name) VALUES ('" + chat_id +
       "', '" + url + "', '" + station_name + "')"
@@ -44,6 +45,7 @@ def create_table_once():
        url TEXT UNIQUE NOT NULL, 
        station_name TEXT NOT NULL);''')
     print("Table created successfully")
+    print(cur)
     
   except creaeTableError as err:
     print(err)
