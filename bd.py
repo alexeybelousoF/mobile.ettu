@@ -43,8 +43,9 @@ def create_table_once():
        chat_id CHAR(25) NOT NULL,
        url TEXT UNIQUE NOT NULL, 
        station_name TEXT NOT NULL);''')
+    con.commit()
     print("Table created successfully")
-    print(cur)
+    con.close()
     
   except psycopg2.Error as err:
     print(err.pgerror)
