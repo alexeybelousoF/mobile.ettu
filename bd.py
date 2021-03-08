@@ -19,7 +19,7 @@ def set_saved(chat_id, url, station_name):
     con.close()
 
   except saveError as err:
-    print(err)
+    print('saveError' + err)
 
 def get_saved(chat_id):
   con = bd_init()
