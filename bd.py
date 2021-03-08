@@ -8,12 +8,18 @@ print("Database opened successfully")
 def set_saved(chat_id, url, station_name):
   con = bd_init()
   cur = con.cursor()
-  cur.execute(
-    "INSERT INTO userdata (CHAT_ID,URL,station_name) VALUES ('"+ chat_id +"', '"+ url + "', '"+ station_name + "')"
-  )
-  print('Сохранение для юзера '+ chat_id + ' Страничка ' + url)
-  con.commit()
-  con.close()
+  try:
+
+    cur.execute(
+      "INSERT INTO userdata (CHAT_ID,URL,station_name) VALUES ('" + chat_id +
+      "', '" + url + "', '" + station_name + "')"
+    )
+    print('Сохранение для юзера '+ chat_id + ' Страничка ' + url)
+    con.commit()
+    con.close()
+
+  except saveError as err:
+    print(err)
 
 def get_saved(chat_id):
   con = bd_init()
@@ -32,10 +38,14 @@ def bd_init():
 def create_table_once():
   con = bd_init()
   cur = con.cursor()
-  cur.execute('''CREATE TABLE userdata 
-     (id SERIAL,
-     CHAT_ID CHAR(25) NOT NULL,
-     URL TEXT UNIQUE NOT NULL, station_name TEXT NOT NULL);''')
-  print("Table created successfully")
+  try:
+    cur.execute('''CREATE TABLE userdata 
+       (id SERIAL,
+       CHAT_ID CHAR(25) NOT NULL,
+       URL TEXT UNIQUE NOT NULL, station_name TEXT NOT NULL);''')
+    print("Table created successfully")
+    
+    except creaeTableError as err:
+      print(err)
 
 create_table_once()
