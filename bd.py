@@ -7,9 +7,9 @@ print("Database opened successfully")
 
 def set_saved(chat_id, url, station_name):
   con = bd_init()
-  cur = con.cursor()
+  cur = con.cursor('set')
   try:
-    print(cur)
+    cur.callproc('reffunc', ['set'])
     cur.execute(
       "INSERT INTO userdata (chat_id,url,station_name) VALUES ('" + chat_id +
       "', '" + url + "', '" + station_name + "')"
@@ -18,8 +18,8 @@ def set_saved(chat_id, url, station_name):
     con.commit()
     con.close()
 
-  except saveError as err:
-    print('saveError' + err)
+  except psycopg2.Error as err:
+    print(err.pgerror)
 
 def get_saved(chat_id):
   con = bd_init()
@@ -37,7 +37,8 @@ def bd_init():
 
 def create_table_once():
   con = bd_init()
-  cur = con.cursor()
+  cur = con.cursor('create')
+  cur.callproc('reffunc', ['create'])
   try:
     cur.execute('''CREATE TABLE userdata 
        (id SERIAL,
@@ -47,8 +48,8 @@ def create_table_once():
     print("Table created successfully")
     print(cur)
     
-  except creaeTableError as err:
-    print(err)
+  except psycopg2.Error as err:
+    print(err.pgerror)
     
     
 create_table_once()
