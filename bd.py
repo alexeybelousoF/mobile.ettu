@@ -9,7 +9,7 @@ def set_saved(chat_id, url, station_name):
   con = bd_init()
   cur = con.cursor('set')
   try:
-    cur.callproc('reffunc', ['set'])
+    cur.callproc('reffunc', [])
     cur.execute(
       "INSERT INTO userdata (chat_id,url,station_name) VALUES ('" + chat_id +
       "', '" + url + "', '" + station_name + "')"
@@ -37,7 +37,7 @@ def bd_init():
 
 def create_table_once():
   con = bd_init()
-  cur = con.cursor('create')
+  cur = con.cursor()
   cur.callproc('reffunc', ['create'])
   try:
     cur.execute('''CREATE TABLE userdata 
